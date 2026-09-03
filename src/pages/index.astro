@@ -1,193 +1,204 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const titleWords = ['Sachin', 'Dohdiya'];
-
-// Build per-character markup for each word so the .char slideInUp animation fires.
-// word 0 ("Sachin"): nth-child(1) — fills black on render
-// word 1 ("Dohdiya"): nth-child(2) — outlined (text-fill: transparent) on render, fills on .hero-title:hover
-const heroTitle = titleWords.map((word, wi) => {
+const heroWords = ['Sachin', 'Dohdiya'];
+const heroLabel = 'Director · Builder';
+const heroTitle = heroWords.map((word, wi) => {
   const baseDelay = wi === 0 ? 0.4 : 0.6;
   const chars = [...word].map((c, ci) =>
     `<span class="char" style="animation-delay:${(baseDelay + ci * 0.04).toFixed(2)}s">${c}</span>`
   ).join('');
-  return `<span class="word">${chars}</span>`;
+  return `<span class="word" aria-hidden="true">${chars}</span>`;
 }).join(' ');
-const heroPrompt = `~/${titleWords[0].toLowerCase()} $`;
+
+const stats = [
+  { number: '10+', label: 'Years' },
+  { number: '2',   label: 'Businesses' },
+  { number: '1',   label: 'Family' },
+  { number: '2k+', label: 'GitHub Stars' },
+];
 
 const repos = [
-  { name: 'free-claude-code-proxy',  stars: '600+', role: 'AI tooling', desc: 'Self-hosted proxy that gives Claude Code 40+ free upstreams through one bearer key.' },
-  { name: 'free-claude-code',        stars: '500+', role: 'CLI',        desc: 'Run Claude Code, Codex, and Pi for free from your terminal. One install, zero API keys.' },
-  { name: 'claude-code-local',       stars: '400+', role: 'on-device',  desc: 'Run Claude Code 100% on-device with local AI on Apple Silicon. No data leaves the box.' },
-  { name: 'awesome-claude-skills',   stars: '480+', role: 'curated',    desc: 'Curated collection of 50+ verified skills for Claude Code, Claude.ai, and the API.' },
-  { name: 'claude-code-hooks',       stars: '460+', role: 'automation', desc: 'A growing collection of useful Claude Code hooks. Copy, paste, customize.' },
-  { name: 'local-devin',             stars: '300+', role: 'agent',      desc: 'An open-source, local alternative to Devin AI. Powered by local Ollama models and Claude Code.' },
+  { name: 'free-claude-code-proxy', stars: '600+ ★', role: 'Creator',  desc: 'Self-hosted proxy that gives Claude Code 40+ free upstreams through one bearer key.' },
+  { name: 'free-claude-code',       stars: '500+ ★', role: 'Creator',  desc: 'Run Claude Code, Codex, and Pi for free from your terminal. One install, zero API keys.' },
+  { name: 'claude-code-local',      stars: '400+ ★', role: 'Creator',  desc: 'Run Claude Code 100% on-device with local AI on Apple Silicon. No data leaves the box.' },
+  { name: 'awesome-claude-skills',  stars: '480+ ★', role: 'Creator',  desc: 'Curated collection of 50+ verified skills for Claude Code, Claude.ai, and the API.' },
+  { name: 'claude-code-hooks',      stars: '460+ ★', role: 'Creator',  desc: 'A growing collection of useful Claude Code hooks. Copy, paste, customize.' },
+  { name: 'local-devin',            stars: '300+ ★', role: 'Creator',  desc: 'An open-source, local alternative to Devin AI. Powered by local Ollama models and Claude Code.' },
 ];
 
 const experience = [
-  {
-    range: 'Sep 2022 — Present',
-    role: 'Director',
-    company: 'Asian Marmo Private Limited',
-    desc: 'Joined the family marble business as Director. CIN U52390RJ2022PTC083747.',
-  },
-  {
-    range: '~2020 — 2022',
-    role: 'Founder / Builder',
-    company: 'FabricSG',
-    desc: 'Built and ran FabricSG, a premium fabric and textile business based out of Jaipur.',
-  },
-  {
-    range: '2019 — Present',
-    role: 'Fitness creator',
-    company: '@sachindohdiya',
-    desc: 'Public fitness journey since 2014. Mr. Rajasthan 2019. Verified creator on Instagram.',
-  },
+  { year: '2022 — Present', role: 'Director',                    company: 'Asian Marmo Private Limited', desc: 'Joined the family marble business as Director. Third-generation operation in Kishangarh and Jaipur. CIN U52390RJ2022PTC083747.' },
+  { year: '~2020 — 2022',   role: 'Founder / Builder',           company: 'FabricSG',                    desc: 'Built and ran FabricSG, a premium fabric and textile business based out of Jaipur.' },
+  { year: '2014 — Present', role: 'Fitness creator',             company: '@sachindohdiya',             desc: 'Mr. Rajasthan 2019. Public fitness journey since 2014. Verified creator on Instagram.' },
 ];
 
 const posts = [
-  { slug: 'prime-agent-autonomous-coding', title: 'Configuring Prime Agent 0.9.1 for Long-Running Autonomous Coding', date: '2026-09-03', desc: 'How I wired Prime Agent to a local Free Claude Code proxy with 40+ upstream models, xhigh reasoning, and bounded autonomous runs.' },
-  { slug: 'claude-code-lsp-enable',        title: 'The 2-Minute Claude Code Upgrade: Enabling the LSP Tool', date: '2026-09-03', desc: 'Every Claude Code user is running without LSP. The flag, the marketplace plugins, and the install.' },
-  { slug: 'local-claude-code-proxy',       title: 'Routing Claude Code Through a Local Free Model Proxy', date: '2026-09-02', desc: 'How I built a 600+ star self-hosted proxy that gives Claude Code 40+ free upstream models through one bearer key.' },
+  { slug: 'prime-agent-autonomous-coding', title: 'Configuring Prime Agent 0.9.1 for Long-Running Autonomous Coding', date: '2026-09-03', excerpt: 'How I wired Prime Agent to a local Free Claude Code proxy with 40+ upstream models, xhigh reasoning, and bounded autonomous runs.' },
+  { slug: 'claude-code-lsp-enable',        title: 'The 2-Minute Claude Code Upgrade: Enabling the LSP Tool',         date: '2026-09-03', excerpt: 'Every Claude Code user is running without LSP. The flag, the marketplace plugins, and the install.' },
+  { slug: 'local-claude-code-proxy',       title: 'Routing Claude Code Through a Local Free Model Proxy',            date: '2026-09-02', excerpt: 'How I built a 600+ star self-hosted proxy that gives Claude Code 40+ free upstream models through one bearer key.' },
+  { slug: 'hindcast-claude-replay',        title: 'Browse, Search, and Replay Every Claude Code Session',            date: '2026-08-28', excerpt: 'A timeline scrubber and cost ledger for every Claude Code session on your Mac. One-paste resume.' },
+  { slug: 'fabricsg-jaipur',               title: 'Building a Premium Fabric Business in Jaipur',                    date: '2026-08-12', excerpt: 'Notes from running a textile business in Kishangarh. Suppliers, logistics, and the parts no one tells you.' },
+  { slug: 'marble-business-third-gen',     title: 'A Third-Generation Marble Business, in Code',                    date: '2026-07-30', excerpt: 'Running a family marble business as a 28-year-old Director. What I learned in year one, and what I am changing in year three.' },
 ];
 
+const contactSegments = [
+  { title: 'Business',  desc: 'Marble, fabric, and trading enquiries', cta: 'Enquire →', mailto: 'fabricsg' },
+  { title: 'Open Source', desc: 'AI tooling, Claude Code, and hobby projects', cta: 'Collaborate →', mailto: 'github' },
+  { title: 'Fitness',   desc: 'Training, nutrition, and competition notes', cta: 'Follow →', mailto: 'instagram' },
+  { title: 'Speaking',  desc: 'Local events in Jaipur, AI meetups', cta: 'Invite →', mailto: 'instagram' },
+];
 ---
 
 <Base>
-  <!-- HERO -->
-  <section class="hero min-h-screen flex items-center justify-center relative bg-gradient-to-br from-[#fafafa] to-white px-8 py-24">
-    <div class="text-center max-w-[900px] px-8">
-      <p class="hero-label text-xs tracking-[0.3em] uppercase mb-8 opacity-60 font-medium">{heroPrompt}</p>
-      <h1 class="hero-title text-[clamp(3rem,8vw,7rem)] font-bold leading-[0.9] mb-6 tracking-[-0.04em]" set:html={heroTitle} />
-      <p class="hero-subtitle text-2xl font-light mb-8 text-[#495057]">Director at Asian Marmo. Founder of FabricSG.</p>
-      <p class="hero-description text-lg leading-[1.7] max-w-[600px] mx-auto mb-12 text-[#6c757d]">I run a marble business in Jaipur and a fabric business in Kishangarh. Outside of work: a long-time interest in bodybuilding, and a hobby of open-sourcing local-first AI tooling.</p>
-      <div class="hero-cta flex gap-6 justify-center items-center">
-        <a href="#opensource" class="cta-primary text-black text-lg font-medium tracking-[-0.01em] relative">See the work <span class="arrow">→</span></a>
-        <a href="#contact" class="cta-secondary text-[#adb5bd] text-[0.9375rem] font-normal relative opacity-80 hover:text-black hover:opacity-100 transition-all duration-300">Get in touch</a>
+  <!-- HOME / HERO -->
+  <section id="home" class="hero" itemscope itemtype="https://schema.org/Person">
+    <div class="hero-content">
+      <div class="hero-label">{heroLabel}</div>
+      <h1 class="hero-title" itemprop="name" aria-label={`${heroWords[0]} ${heroWords[1]}`} set:html={heroTitle} />
+      <div class="hero-subtitle" itemprop="jobTitle">
+        Director at <a href="https://www.instagram.com/asianmarmo/" target="_blank" rel="noopener" itemprop="worksFor" style="color:inherit; text-decoration:none; border-bottom:1px solid currentColor;">Asian Marmo</a>
+      </div>
+      <div class="hero-description" itemprop="description">
+        I run a marble business in Jaipur and a fabric business in Kishangarh. Outside of work: a long-time interest in bodybuilding, and a hobby of open-sourcing local-first AI tooling.
+      </div>
+      <div class="hero-cta desktop-only">
+        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+        <a href="/blog/" class="btn btn-secondary">Read the Writing</a>
+      </div>
+      <div class="hero-cta mobile-only">
+        <a href="#contact" class="cta-primary">Let's talk <span class="arrow">→</span></a>
+        <a href="/blog/" class="cta-secondary">Read the writing</a>
       </div>
     </div>
-    <div class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-      <span class="scroll-text text-xs tracking-[0.2em] uppercase text-[#adb5bd]" style="writing-mode: vertical-lr;">scroll</span>
-      <span class="scroll-line w-px h-10 bg-[#ced4da] block" style="animation: scrollLine 2s ease-in-out infinite; transform-origin: top;"></span>
+    <div class="scroll-indicator">
+      <div class="scroll-text">Scroll</div>
+      <div class="scroll-line"></div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="py-32 px-12 bg-[#f8f9fa]">
-    <div class="max-w-[1200px] mx-auto">
-      <div class="text-center mb-16">
-        <p class="text-sm tracking-[0.2em] uppercase text-[#adb5bd] mb-4">about</p>
-        <h2 class="text-5xl font-bold tracking-[-0.02em] mb-8 leading-[1.1]">A builder in marble, fabric, and code.</h2>
+  <section id="about" class="about" itemscope itemtype="https://schema.org/AboutPage">
+    <div class="about-container">
+      <div class="section-header" style="text-align:center; margin-bottom:3rem;">
+        <div class="about-label" data-section="Sachin Dohdiya — Profile">About</div>
+        <h2 class="about-title fade-in">Builder</h2>
       </div>
-      <div class="max-w-[800px] mx-auto text-lg leading-[1.8] text-[#495057]">
-        <p class="mb-6">I'm Sachin Dohdiya — 28, based out of Kishangarh and Jaipur, Rajasthan. Director at Asian Marmo Private Limited since 2022, where I help run a third-generation marble business. I also built FabricSG, a premium fabric and textile business.</p>
-        <p class="mb-6">Outside of the businesses, I have a long-time interest in bodybuilding (Mr. Rajasthan, 2019) and a reading habit on autonomous coding agents. Most weekends you'll find me in a gym in Jaipur, or pushing to GitHub as <a href="https://github.com/sachin7x" class="text-black underline underline-offset-4">@sachin7x</a>.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience" class="py-32 px-12 bg-white">
-    <div class="max-w-[1200px] mx-auto">
-      <div class="text-center mb-16">
-        <p class="text-sm tracking-[0.2em] uppercase text-[#adb5bd] mb-4">experience</p>
-        <h2 class="text-5xl font-bold tracking-[-0.02em] mb-4">Where I've been building.</h2>
-      </div>
-      <div class="relative max-w-[800px] mx-auto">
-        <span class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[#dee2e6] -translate-x-1/2"></span>
-        {experience.map((e, idx) => (
-          <div class="relative my-16 px-12">
-            <span class="absolute left-1/2 top-8 w-4 h-4 bg-black rounded-full -translate-x-1/2 z-10"></span>
-            <div class={`bg-white p-8 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-[#e9ecef] ${idx % 2 === 0 ? 'mr-[50%] text-right pr-8' : 'ml-[50%] text-left pl-8'}`}>
-              <div class="text-sm text-[#adb5bd] font-mono mb-2">{e.range}</div>
-              <div class="text-xl font-semibold mb-2">{e.role}</div>
-              <div class="text-base text-[#6c757d] mb-4">{e.company}</div>
-              <p class="text-[0.9375rem] leading-[1.6] text-[#495057]">{e.desc}</p>
-            </div>
+      <div class="about-stats fade-in">
+        {stats.map(s => (
+          <div class="stat-item">
+            <div class="stat-number">{s.number}</div>
+            <div class="stat-label">{s.label}</div>
           </div>
         ))}
+      </div>
+      <div class="about-text fade-in">
+        <p>I run businesses: marble in Jaipur, fabric in Kishangarh.</p>
+        <p>Not decks. Not strategies. Things that ship and work.</p>
+        <p>The pattern is the same: real problem, small team, relentless focus.</p>
       </div>
     </div>
   </section>
 
   <!-- OPEN SOURCE -->
-  <section id="opensource" class="py-32 px-12 bg-[#f8f9fa]">
-    <div class="max-w-[1000px] mx-auto">
-      <div class="text-center mb-16">
-        <p class="text-sm tracking-[0.2em] uppercase text-[#adb5bd] mb-4">open source</p>
-        <h2 class="text-5xl font-bold tracking-[-0.02em] mb-4">Tools I maintain.</h2>
-        <p class="text-lg text-[#6c757d] max-w-[600px] mx-auto">A small selection of public repositories under my GitHub handle.</p>
+  <section id="opensource" class="opensource">
+    <div class="opensource-container">
+      <div class="section-header">
+        <h2 class="section-title fade-in">Open Source</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+      <div class="opensource-grid fade-in">
         {repos.map(r => (
-          <a href={`https://github.com/sachin7x/${r.name}`} class="os-card block bg-white border border-[#e9ecef] rounded-lg p-8">
-            <div class="text-xl font-semibold mb-2 text-black">{r.name}</div>
-            <div class="flex gap-4 mb-4 font-mono text-[0.8125rem]">
-              <span class="text-[#6c757d]">★ {r.stars}</span>
-              <span class="text-[#adb5bd]">{r.role}</span>
+          <a href={`https://github.com/sachin7x/${r.name}`} target="_blank" rel="noopener" class="opensource-card">
+            <div class="opensource-name">{r.name}</div>
+            <div class="opensource-meta">
+              <span class="opensource-stars">{r.stars}</span>
+              <span class="opensource-role">{r.role}</span>
             </div>
-            <p class="text-[0.9rem] text-[#6c757d] leading-[1.6]">{r.desc}</p>
+            <div class="opensource-description">{r.desc}</div>
           </a>
         ))}
-      </div>
-      <div class="text-center mt-12">
-        <a class="inline-block mt-8 text-sm font-medium text-black hover:opacity-60 transition-opacity" href="https://github.com/sachin7x?tab=repositories">+ more on github →</a>
       </div>
     </div>
   </section>
 
-  <!-- WRITING -->
-  <section id="writing" class="py-32 px-12 bg-white">
-    <div class="max-w-[1000px] mx-auto">
-      <div class="text-center mb-16">
-        <p class="text-sm tracking-[0.2em] uppercase text-[#adb5bd] mb-4">writing</p>
-        <h2 class="text-5xl font-bold tracking-[-0.02em] mb-4">Recent notes.</h2>
+  <!-- EXPERIENCE -->
+  <section id="experience" class="experience">
+    <div class="experience-container">
+      <div class="section-header">
+        <h2 class="section-title fade-in">Experience</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+      <div class="experience-timeline fade-in">
+        {experience.map(e => (
+          <div class="experience-item">
+            <div class="experience-dot"></div>
+            <div class="experience-content">
+              <div class="experience-year">{e.year}</div>
+              <div class="experience-role">{e.role}</div>
+              <div class="experience-company">{e.company}</div>
+              <div class="experience-description">{e.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Reveal elements with .fade-in as they scroll into view (matches karanbansal.in).
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  </script>
+
+  <!-- WRITING -->
+  <section id="writing" class="writing">
+    <div class="writing-container">
+      <div class="section-header">
+        <h2 class="section-title fade-in">Writing</h2>
+      </div>
+      <div class="writing-grid fade-in">
         {posts.map(p => (
-          <a href={`/blog/${p.slug}/`} class="write-card block p-8 border border-[#e9ecef] rounded-lg">
-            <div class="text-lg font-semibold mb-2 leading-[1.3]">{p.title}</div>
-            <div class="font-mono text-[0.8125rem] text-[#adb5bd] mb-3">{p.date}</div>
-            <p class="text-[0.9375rem] text-[#6c757d] leading-[1.6]">{p.desc}</p>
+          <a href={`/blog/${p.slug}/`} class="writing-card">
+            <div class="writing-card-title">{p.title}</div>
+            <div class="writing-card-meta">{p.date}</div>
+            <div class="writing-card-excerpt">{p.excerpt}</div>
           </a>
         ))}
       </div>
-      <div class="text-center mt-12">
-        <a class="inline-block mt-8 text-sm font-medium text-black hover:opacity-60 transition-opacity" href="/blog/">All posts →</a>
+      <a href="/blog/" class="writing-more fade-in">All posts →</a>
+      <div class="fade-in" style="text-align:center; margin-top:2.5rem;">
+        <form class="subscribe-form" action="https://buttondown.com/api/emails/embed-subscribe/sachindohdiya" method="post" target="_blank">
+          <input type="email" name="email" placeholder="you@example.com" required aria-label="Email address" />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="subscribe-note">New posts by email. No spam, unsubscribe anytime.</p>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-32 px-12 bg-black text-white">
-    <div class="max-w-[1200px] mx-auto text-center">
-      <p class="text-sm tracking-[0.2em] uppercase text-white/50 mb-4">contact</p>
-      <h2 class="text-5xl font-bold tracking-[-0.02em] mb-4">Let's build.</h2>
-      <p class="text-lg mb-12 opacity-80">For business enquiries, reach out via any of the channels below.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 my-16 max-w-[1000px] mx-auto">
-        <div class="text-center flex flex-col items-center">
-          <div class="text-xl font-semibold mb-4 inline-block relative">
-            github
-            <span class="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#6c757d] transition-colors duration-300 group-hover:bg-white"></span>
+  <section id="contact" class="contact">
+    <div class="contact-container">
+      <h2 class="contact-title fade-in">Let's Build</h2>
+      <div class="contact-segments fade-in">
+        {contactSegments.map(s => (
+          <div class="contact-segment">
+            <h3 class="segment-title">{s.title}</h3>
+            <p class="segment-description">{s.desc}</p>
+            <a href={`https://${s.mailto === 'github' ? 'github.com/sachin7x' : s.mailto === 'instagram' ? 'www.instagram.com/sachindohdiya/' : 'www.facebook.com/fabricsg/'}`} target="_blank" rel="noopener" class="segment-cta">{s.cta}</a>
           </div>
-          <p class="text-base leading-[1.6] text-[#dee2e6] opacity-90">Open-source hobby projects and AI tooling.</p>
-          <a class="inline-block pt-4 text-sm text-[#adb5bd] hover:text-white transition-colors font-mono" href="https://github.com/sachin7x">github.com/sachin7x →</a>
-        </div>
-        <div class="text-center flex flex-col items-center">
-          <div class="text-xl font-semibold mb-4">instagram</div>
-          <p class="text-base leading-[1.6] text-[#dee2e6] opacity-90">Fitness, business, and personal notes.</p>
-          <a class="inline-block pt-4 text-sm text-[#adb5bd] hover:text-white transition-colors font-mono" href="https://www.instagram.com/sachindohdiya/">@sachindohdiya →</a>
-        </div>
-        <div class="text-center flex flex-col items-center">
-          <div class="text-xl font-semibold mb-4">facebook</div>
-          <p class="text-base leading-[1.6] text-[#dee2e6] opacity-90">FabricSG, our premium fabric business.</p>
-          <a class="inline-block pt-4 text-sm text-[#adb5bd] hover:text-white transition-colors font-mono" href="https://www.facebook.com/fabricsg/">fabricsg →</a>
-        </div>
+        ))}
       </div>
-      <div class="flex justify-center gap-8 mt-12">
-        <a class="contact-link text-white text-lg transition-all duration-300" href="https://github.com/sachin7x">github</a>
-        <a class="contact-link text-white text-lg transition-all duration-300" href="https://www.instagram.com/sachindohdiya/">instagram</a>
-        <a class="contact-link text-white text-lg transition-all duration-300" href="https://www.facebook.com/fabricsg/">facebook</a>
+      <div class="contact-links fade-in">
+        <a href="https://github.com/sachin7x" class="contact-link" target="_blank" rel="noopener">github.com/sachin7x →</a>
+        <a href="https://www.instagram.com/sachindohdiya/" class="contact-link" target="_blank" rel="noopener">Instagram →</a>
+        <a href="https://www.facebook.com/fabricsg/" class="contact-link" target="_blank" rel="noopener">Facebook →</a>
       </div>
     </div>
   </section>
