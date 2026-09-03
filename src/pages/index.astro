@@ -3,8 +3,7 @@ import Base from '../layouts/Base.astro';
 
 const heroWords = ['Sachin', 'Dohdiya'];
 const heroLabel = 'Director · Builder';
-// Per-word animation delay is set in CSS via .hero-title .word:nth-child(N) .char.
-// Chars within the same word animate simultaneously (karan-faithful).
+// Per-char animation delay is applied in JS below (karan-faithful: 0.4s base, 0.2s per word, 0.1s per char).
 const heroTitle = heroWords.map(word =>
   [...word].map(c => `<span class="char">${c}</span>`).join('')
 ).map(chars => `<span class="word" aria-hidden="true">${chars}</span>`).join(' ');
@@ -141,6 +140,14 @@ const contactSegments = [
     </div>
   </section>
 
+  <script>
+    // Stagger character animations (karan-faithful: 0.4s base, 0.2s per word, 0.1s per char).
+    document.querySelectorAll('.hero-title .word').forEach((word, wordIndex) => {
+      word.querySelectorAll('.char').forEach((char, charIndex) => {
+        char.style.animationDelay = `${0.4 + (wordIndex * 0.2) + (charIndex * 0.1)}s`;
+      });
+    });
+  </script>
   <script>
     // Reveal elements with .fade-in as they scroll into view (matches karanbansal.in).
     const io = new IntersectionObserver((entries) => {
