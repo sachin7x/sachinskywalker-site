@@ -3,13 +3,11 @@ import Base from '../layouts/Base.astro';
 
 const heroWords = ['Sachin', 'Dohdiya'];
 const heroLabel = 'Director · Builder';
-const heroTitle = heroWords.map((word, wi) => {
-  const baseDelay = wi === 0 ? 0.4 : 0.6;
-  const chars = [...word].map((c, ci) =>
-    `<span class="char" style="animation-delay:${(baseDelay + ci * 0.04).toFixed(2)}s">${c}</span>`
-  ).join('');
-  return `<span class="word" aria-hidden="true">${chars}</span>`;
-}).join(' ');
+// Per-word animation delay is set in CSS via .hero-title .word:nth-child(N) .char.
+// Chars within the same word animate simultaneously (karan-faithful).
+const heroTitle = heroWords.map(word =>
+  [...word].map(c => `<span class="char">${c}</span>`).join('')
+).map(chars => `<span class="word" aria-hidden="true">${chars}</span>`).join(' ');
 
 const stats = [
   { number: '10+', label: 'Years' },
