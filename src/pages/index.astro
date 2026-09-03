@@ -3,6 +3,17 @@ import Base from '../layouts/Base.astro';
 
 const titleWords = ['Sachin', 'Dohdiya'];
 
+// Build per-character markup for each word so the .char slideInUp animation fires.
+// word 0 ("Sachin"): nth-child(1) — fills black on render
+// word 1 ("Dohdiya"): nth-child(2) — outlined (text-fill: transparent) on render, fills on .hero-title:hover
+const heroWords = titleWords.map((word, wi) => {
+  const baseDelay = wi === 0 ? 0.4 : 0.6;
+  return [...word].map((c, ci) => (
+    `<span class="char" style="animation-delay:${(baseDelay + ci * 0.04).toFixed(2)}s">${c}</span>`
+  )).join('');
+});
+const heroPrompt = `~/${titleWords[0].toLowerCase()} $`;
+
 const repos = [
   { name: 'free-claude-code-proxy',  stars: '600+', role: 'AI tooling', desc: 'Self-hosted proxy that gives Claude Code 40+ free upstreams through one bearer key.' },
   { name: 'free-claude-code',        stars: '500+', role: 'CLI',        desc: 'Run Claude Code, Codex, and Pi for free from your terminal. One install, zero API keys.' },
@@ -39,21 +50,14 @@ const posts = [
   { slug: 'local-claude-code-proxy',       title: 'Routing Claude Code Through a Local Free Model Proxy', date: '2026-09-02', desc: 'How I built a 600+ star self-hosted proxy that gives Claude Code 40+ free upstream models through one bearer key.' },
 ];
 
-// Helper: split a string into per-character spans for the hero animation.
-function chars(s: string) {
-  return [...s].map((c, i) => `<span class="char" style="animation-delay:${0.4 + i * 0.04}s">${c === ' ' ? '&nbsp;' : c}</span>`).join('');
-}
 ---
 
 <Base>
   <!-- HERO -->
   <section class="hero min-h-screen flex items-center justify-center relative bg-gradient-to-br from-[#fafafa] to-white px-8 py-24">
     <div class="text-center max-w-[900px] px-8">
-      <p class="hero-label text-xs tracking-[0.3em] uppercase mb-8 opacity-60 font-medium">~/{titleWords[0].toLowerCase()} $</p>
-      <h1 class="hero-title text-[clamp(3rem,8vw,7rem)] font-bold leading-[0.9] mb-6 tracking-[-0.04em]">
-        <span class="word">{titleWords[0]}</span>
-        <span class="word">{titleWords[1]}</span>
-      </h1>
+      <p class="hero-label text-xs tracking-[0.3em] uppercase mb-8 opacity-60 font-medium">{heroPrompt}</p>
+      <h1 class="hero-title text-[clamp(3rem,8vw,7rem)] font-bold leading-[0.9] mb-6 tracking-[-0.04em]" set:html={heroWords.map((w, i) => `<span class="word">${w}</span>`).join(' ')} />
       <p class="hero-subtitle text-2xl font-light mb-8 text-[#495057]">Director at Asian Marmo. Founder of FabricSG.</p>
       <p class="hero-description text-lg leading-[1.7] max-w-[600px] mx-auto mb-12 text-[#6c757d]">I run a marble business in Jaipur and a fabric business in Kishangarh. Outside of work: a long-time interest in bodybuilding, and a hobby of open-sourcing local-first AI tooling.</p>
       <div class="hero-cta flex gap-6 justify-center items-center">
@@ -186,5 +190,4 @@ function chars(s: string) {
       </div>
     </div>
   </section>
-</Base>
 </Base>
