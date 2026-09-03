@@ -11,10 +11,16 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 <Base title={`${post.data.title} — Sachin Dohdiya`} description={post.data.description}>
-  <article class="max-w-3xl">
-    <a href="/blog/" class="text-sm text-white/50 no-underline hover:text-white">← All posts</a>
-    <h1 class="mt-6 text-4xl font-semibold tracking-tight">{post.data.title}</h1>
-    <div class="text-sm text-white/40 font-mono mt-2">{post.data.date} · {post.data.tags.join(' · ')}</div>
-    <div class="mt-10 prose-post"><Content /></div>
+  <article style="max-width:760px; margin:0 auto; padding:10rem 2rem 6rem;">
+    <a href="/blog/" class="writing-more fade-in" style="display:inline-block; margin-bottom:2rem;">← All posts</a>
+    <h1 class="writing-card-title" style="font-size:2.5rem; margin-bottom:0.75rem;">{post.data.title}</h1>
+    <div class="writing-card-meta" style="margin-bottom:2.5rem;">{post.data.date} · {post.data.tags.join(' · ')}</div>
+    <div class="prose-post"><Content /></div>
   </article>
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  </script>
 </Base>

@@ -5,17 +5,27 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog')).sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
 ---
 <Base title="Writing — Sachin Dohdiya" description="Notes on local-first AI tooling, autonomous coding agents, and the engineering behind open-source agent projects.">
-  <h1 class="text-4xl font-bold tracking-tight mb-2">Writing</h1>
-  <p class="text-white/60 mb-12">Notes on local-first AI tooling, autonomous coding agents, and the engineering behind open-source agent projects.</p>
-  <ul class="space-y-8">
-    {posts.map(p => (
-      <li>
-        <a href={`/blog/${p.slug}/`} class="block group">
-          <div class="text-xs font-mono text-white/50">{p.data.date}</div>
-          <div class="text-2xl font-semibold mt-1 group-hover:text-accent-500">{p.data.title}</div>
-          <p class="mt-2 text-white/70 max-w-3xl">{p.data.description}</p>
-        </a>
-      </li>
-    ))}
-  </ul>
+  <section class="writing" style="padding-top:10rem;">
+    <div class="writing-container">
+      <div class="section-header">
+        <h1 class="section-title fade-in">Writing</h1>
+      </div>
+      <div class="writing-grid fade-in">
+        {posts.map(p => (
+          <a href={`/blog/${p.slug}/`} class="writing-card">
+            <div class="writing-card-title">{p.data.title}</div>
+            <div class="writing-card-meta">{p.data.date} · {p.data.tags.join(' · ')}</div>
+            <div class="writing-card-excerpt">{p.data.description}</div>
+          </a>
+        ))}
+      </div>
+      <a href="/#writing" class="writing-more fade-in">← Back to home</a>
+    </div>
+  </section>
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  </script>
 </Base>
