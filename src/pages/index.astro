@@ -43,10 +43,10 @@ const posts = [
 ];
 
 const contactSegments = [
-  { title: 'Business',  desc: 'Marble, fabric, and trading enquiries', cta: 'Enquire →', mailto: 'fabricsg' },
-  { title: 'Open Source', desc: 'AI tooling, Claude Code, and hobby projects', cta: 'Collaborate →', mailto: 'github' },
-  { title: 'Fitness',   desc: 'Training, nutrition, and competition notes', cta: 'Follow →', mailto: 'instagram' },
-  { title: 'Speaking',  desc: 'Local events in Jaipur, AI meetups', cta: 'Invite →', mailto: 'instagram' },
+  { title: 'Business',    desc: 'Marble, fabric, and trading enquiries',     cta: 'Enquire →',     href: 'https://www.facebook.com/fabricsg/' },
+  { title: 'Open Source', desc: 'AI tooling, Claude Code, hobby projects',   cta: 'Collaborate →', href: 'https://github.com/sachin7x' },
+  { title: 'Fitness',     desc: 'Training, nutrition, competition notes',    cta: 'Follow →',      href: 'https://www.instagram.com/sachindohdiya/' },
+  { title: 'Speaking',    desc: 'Local events in Jaipur, AI meetups',        cta: 'Invite →',      href: 'https://www.instagram.com/sachindohdiya/' },
 ];
 ---
 
@@ -191,7 +191,7 @@ const contactSegments = [
           <div class="contact-segment">
             <h3 class="segment-title">{s.title}</h3>
             <p class="segment-description">{s.desc}</p>
-            <a href={`https://${s.mailto === 'github' ? 'github.com/sachin7x' : s.mailto === 'instagram' ? 'www.instagram.com/sachindohdiya/' : 'www.facebook.com/fabricsg/'}`} target="_blank" rel="noopener" class="segment-cta">{s.cta}</a>
+            <a href={s.href} target="_blank" rel="noopener" class="segment-cta">{s.cta}</a>
           </div>
         ))}
       </div>
