@@ -1,12 +1,11 @@
 ---
-const { title = 'Sachin Dohdiya', description = 'Director at Asian Marmo, founder of FabricSG. Based out of Kishangarh and Jaipur, Rajasthan.', image = '/og-image.svg' } = Astro.props;
+const { title = 'Sachin Dohdiya', description = 'Director at Asian Marmo Private Limited. Founder of FabricSG. Building muscle, a business, and a legacy. Based out of Kishangarh and Jaipur, Rajasthan.', image = '/og-image.svg' } = Astro.props;
 const { pathname } = Astro.url;
-const isActive = (href) => href === '/' ? pathname === '/' : pathname.startsWith(href);
 const links = [
   { href: '/#about',        label: 'About' },
   { href: '/#opensource',   label: 'Open Source' },
   { href: '/#experience',   label: 'Experience' },
-  { href: '/blog/',         label: 'Writing' },
+  { href: '/#writing',      label: 'Writing' },
   { href: '/#contact',      label: 'Contact' },
 ];
 ---
@@ -14,7 +13,7 @@ const links = [
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="author" content="Sachin Dohdiya" />
@@ -28,25 +27,36 @@ const links = [
   <link rel="canonical" href={Astro.url} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="alternate" type="application/rss+xml" title="Sachin Dohdiya" href="/rss.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
 </head>
-<body class="min-h-screen bg-black text-white font-sans">
-  <header class="border-b border-white/10">
-    <nav class="max-w-3xl mx-auto px-6 py-6 flex items-baseline gap-6 text-sm font-mono">
-      <a href="/" class="font-semibold tracking-tight">sachindohdiya</a>
-      <div class="ml-auto flex flex-wrap items-center gap-x-5 gap-y-2">
+<body class="min-h-screen bg-white text-black font-sans antialiased">
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 px-12 py-8 bg-white/90 backdrop-blur-xl transition-all duration-300" style="transition: all 0.3s ease;">
+    <div class="max-w-[1200px] mx-auto flex items-center justify-between">
+      <a href="/" class="font-mono text-xl font-semibold tracking-tight hover:opacity-70 transition-opacity">sachindohdiya</a>
+      <ul class="flex gap-10 list-none">
         {links.map(l => (
-          <a href={l.href} class={isActive(l.href) ? 'text-white' : 'text-white/60 hover:text-white'}>{l.label}</a>
+          <li>
+            <a href={l.href} class="nav-link text-black/90 text-sm font-medium tracking-wide relative hover:text-black/60 transition-colors duration-300">
+              {l.label}
+            </a>
+          </li>
         ))}
-      </div>
-    </nav>
-  </header>
-  <main class="max-w-3xl mx-auto px-6 py-16">
+      </ul>
+    </div>
+  </nav>
+  <main>
     <slot />
   </main>
-  <footer class="border-t border-white/10 mt-24 py-10 text-xs font-mono text-white/50">
-    <div class="max-w-3xl mx-auto px-6 flex flex-wrap gap-6 items-center justify-between">
-      <div>© {new Date().getFullYear()} Sachin Dohdiya · <a class="hover:text-white" href="https://github.com/sachin7x">github</a> · <a class="hover:text-white" href="/rss.xml">rss</a></div>
-      <div class="opacity-60">built with astro · vercel</div>
+  <footer class="bg-black text-white py-16 px-12">
+    <div class="max-w-[1200px] mx-auto flex flex-wrap items-center justify-between gap-6">
+      <div class="text-sm text-white/70 font-mono">© {new Date().getFullYear()} Sachin Dohdiya</div>
+      <div class="flex gap-6 text-sm font-mono">
+        <a class="hover:text-white/60 transition-colors" href="https://github.com/sachin7x">github</a>
+        <a class="hover:text-white/60 transition-colors" href="/rss.xml">rss</a>
+      </div>
+      <div class="text-xs text-white/40 font-mono">built with astro · vercel</div>
     </div>
   </footer>
 </body>
