@@ -2,11 +2,12 @@
 const { title = 'Sachin Dohdiya', description = 'Director at Asian Marmo Private Limited. Founder of FabricSG. Building muscle, a business, and a legacy. Based out of Kishangarh and Jaipur, Rajasthan.', image = '/og-image.svg' } = Astro.props;
 const { pathname } = Astro.url;
 const links = [
-  { href: '/#about',        label: 'About' },
-  { href: '/#opensource',   label: 'Open Source' },
-  { href: '/#experience',   label: 'Experience' },
-  { href: '/#writing',      label: 'Writing' },
-  { href: '/#contact',      label: 'Contact' },
+  { href: '/#home',        label: 'Home' },
+  { href: '/#about',       label: 'About' },
+  { href: '/#opensource',  label: 'Open Source' },
+  { href: '/#experience',  label: 'Experience' },
+  { href: '/#writing',     label: 'Writing' },
+  { href: '/#contact',     label: 'Contact' },
 ];
 ---
 <!DOCTYPE html>
@@ -27,38 +28,60 @@ const links = [
   <link rel="canonical" href={Astro.url} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="alternate" type="application/rss+xml" title="Sachin Dohdiya" href="/rss.xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
 </head>
-<body class="min-h-screen bg-white text-black font-sans antialiased">
-  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 px-12 py-8 bg-white/90 backdrop-blur-xl transition-all duration-300" style="transition: all 0.3s ease;">
-    <div class="max-w-[1200px] mx-auto flex items-center justify-between">
-      <a href="/" class="font-mono text-xl font-semibold tracking-tight hover:opacity-70 transition-opacity">sachindohdiya</a>
-      <ul class="flex gap-10 list-none">
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <nav id="nav">
+    <div class="nav-container">
+      <a href="/" class="logo">sachindohdiya</a>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
         {links.map(l => (
-          <li>
-            <a href={l.href} class="nav-link text-black/90 text-sm font-medium tracking-wide relative hover:text-black/60 transition-colors duration-300">
-              {l.label}
-            </a>
-          </li>
+          <li><a href={l.href}>{l.label}</a></li>
         ))}
       </ul>
     </div>
   </nav>
-  <main>
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+  <main id="main">
     <slot />
   </main>
-  <footer class="bg-black text-white py-16 px-12">
-    <div class="max-w-[1200px] mx-auto flex flex-wrap items-center justify-between gap-6">
-      <div class="text-sm text-white/70 font-mono">© {new Date().getFullYear()} Sachin Dohdiya</div>
-      <div class="flex gap-6 text-sm font-mono">
-        <a class="hover:text-white/60 transition-colors" href="https://github.com/sachin7x">github</a>
-        <a class="hover:text-white/60 transition-colors" href="/rss.xml">rss</a>
+  <footer class="footer">
+    <div class="footer-content">
+      <p>© {new Date().getFullYear()} Sachin Dohdiya. Built with care.</p>
+      <div class="footer-links">
+        <a href="https://github.com/sachin7x" target="_blank" rel="noopener">github</a>
+        <a href="/rss.xml">rss</a>
       </div>
-      <div class="text-xs text-white/40 font-mono">built with astro · vercel</div>
     </div>
   </footer>
+  <script>
+    // Nav scrolled state
+    const nav = document.getElementById('nav');
+    if (nav) {
+      const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 50);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+    // Mobile menu
+    const toggle = document.getElementById('mobileMenuToggle');
+    const links = document.getElementById('navLinks');
+    const backdrop = document.getElementById('mobileMenuBackdrop');
+    function setMenu(open) {
+      toggle?.classList.toggle('active', open);
+      links?.classList.toggle('active', open);
+      backdrop?.classList.toggle('active', open);
+      toggle?.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    toggle?.addEventListener('click', () => setMenu(!toggle.classList.contains('active')));
+    backdrop?.addEventListener('click', () => setMenu(false));
+    links?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  </script>
 </body>
 </html>
 <style is:global>
