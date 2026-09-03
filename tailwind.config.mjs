@@ -4,8 +4,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: { 50: '#f8fafc', 900: '#0b0b10' },
-        accent: { 500: '#6366f1' },
+        ink: {
+          50: '#ffffff',
+          100: '#f5f5f5',
+          200: '#e5e5e5',
+          300: '#d4d4d4',
+          400: '#a3a3a3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#0a0a0a',
+          950: '#000000',
+        },
       },
       fontFamily: {
         sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'Inter', 'sans-serif'],

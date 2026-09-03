@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 :root { color-scheme: dark; }
-body { @apply bg-ink-900 text-ink-50 antialiased; }
-::selection { @apply bg-accent-500/40; }
-.prose pre { @apply rounded-lg p-4 overflow-x-auto text-sm; }
+html, body { background-color: #000; color: #fff; }
+body { @apply antialiased; }
+::selection { @apply bg-white/20 text-white; }
+a { text-decoration: none; }
+.prose pre { @apply rounded-none p-4 overflow-x-auto text-sm bg-ink-900 border border-ink-800; }
 .prose code { @apply font-mono; }
+.prose a { @apply underline underline-offset-4; }

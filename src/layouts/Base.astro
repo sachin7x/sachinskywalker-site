@@ -1,7 +1,14 @@
 ---
-const { title = 'Sachin Dohdiya', description = 'Director at Asian Marmo, founder of FabricSG. Building muscle, a business, and a legacy. Based out of Kishangarh and Jaipur, Rajasthan.', image = '/og-image.svg' } = Astro.props;
+const { title = 'Sachin Dohdiya', description = 'Director at Asian Marmo, founder of FabricSG. Based out of Kishangarh and Jaipur, Rajasthan.', image = '/og-image.svg' } = Astro.props;
 const { pathname } = Astro.url;
 const isActive = (href) => href === '/' ? pathname === '/' : pathname.startsWith(href);
+const links = [
+  { href: '/#about',        label: 'About' },
+  { href: '/#opensource',   label: 'Open Source' },
+  { href: '/#experience',   label: 'Experience' },
+  { href: '/blog/',         label: 'Writing' },
+  { href: '/#contact',      label: 'Contact' },
+];
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -22,25 +29,24 @@ const isActive = (href) => href === '/' ? pathname === '/' : pathname.startsWith
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="alternate" type="application/rss+xml" title="Sachin Dohdiya" href="/rss.xml" />
 </head>
-<body class="min-h-screen">
-  <header class="sticky top-0 z-50 backdrop-blur bg-ink-900/80 border-b border-white/5">
-    <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center gap-6 text-sm">
-      <a href="/" class="font-semibold tracking-tight">Sachin Dohdiya</a>
-      <div class="ml-auto flex items-center gap-5">
-        <a href="/#work" class={isActive('/#work') ? 'text-accent-500' : 'hover:text-accent-500'}>What I'm up to</a>
-        <a href="/#projects" class={isActive('/#projects') ? 'text-accent-500' : 'hover:text-accent-500'}>Open source</a>
-        <a href="/blog/" class={isActive('/blog') ? 'text-accent-500' : 'hover:text-accent-500'}>Writing</a>
-        <a href="/#contact" class={isActive('/#contact') ? 'text-accent-500' : 'hover:text-accent-500'}>Find me</a>
+<body class="min-h-screen bg-black text-white font-sans">
+  <header class="border-b border-white/10">
+    <nav class="max-w-3xl mx-auto px-6 py-6 flex items-baseline gap-6 text-sm font-mono">
+      <a href="/" class="font-semibold tracking-tight">sachindohdiya</a>
+      <div class="ml-auto flex flex-wrap items-center gap-x-5 gap-y-2">
+        {links.map(l => (
+          <a href={l.href} class={isActive(l.href) ? 'text-white' : 'text-white/60 hover:text-white'}>{l.label}</a>
+        ))}
       </div>
     </nav>
   </header>
-  <main class="max-w-5xl mx-auto px-6 py-12">
+  <main class="max-w-3xl mx-auto px-6 py-16">
     <slot />
   </main>
-  <footer class="border-t border-white/5 mt-24 py-10 text-sm text-white/60">
-    <div class="max-w-5xl mx-auto px-6 flex flex-wrap gap-6 items-center justify-between">
-      <div>© {new Date().getFullYear()} Sachin Dohdiya · <a class="hover:text-accent-500" href="https://github.com/sachin7x">GitHub</a> · <a class="hover:text-accent-500" href="/rss.xml">RSS</a></div>
-      <div class="opacity-60">Built with Astro · Deployed on Vercel</div>
+  <footer class="border-t border-white/10 mt-24 py-10 text-xs font-mono text-white/50">
+    <div class="max-w-3xl mx-auto px-6 flex flex-wrap gap-6 items-center justify-between">
+      <div>© {new Date().getFullYear()} Sachin Dohdiya · <a class="hover:text-white" href="https://github.com/sachin7x">github</a> · <a class="hover:text-white" href="/rss.xml">rss</a></div>
+      <div class="opacity-60">built with astro · vercel</div>
     </div>
   </footer>
 </body>

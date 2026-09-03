@@ -1,25 +1,25 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const projects = [
+const repos = [
   { name: 'free-claude-code-proxy',  desc: 'Self-hosted proxy that gives Claude Code 40+ free upstreams through one bearer key.' },
   { name: 'free-claude-code',        desc: 'Run Claude Code, Codex, and Pi for free from your terminal.' },
   { name: 'claude-code-local',       desc: 'Run Claude Code 100% on-device with local AI on Apple Silicon.' },
   { name: 'awesome-claude-skills',   desc: 'Curated collection of skills for Claude Code and the API.' },
 ];
 
-const roles = [
+const experience = [
   {
-    since: 'Since 2022',
+    range: '2022 — Present',
     role: 'Director',
     org: 'Asian Marmo Private Limited',
-    note: 'Jaipur, Rajasthan.',
+    detail: 'Jaipur, Rajasthan.',
   },
   {
-    since: 'Founder',
-    role: 'Builder',
+    range: '~2020 — 2022',
+    role: 'Founder / Builder',
     org: 'FabricSG',
-    note: 'Premium fabric and textile business.',
+    detail: 'Premium fabric and textile business.',
   },
 ];
 
@@ -31,66 +31,68 @@ const posts = [
 ---
 
 <Base>
-  <section id="home" class="py-12">
-    <p class="text-accent-500 font-mono text-sm mb-6">~/sachindohdiya</p>
-    <h1 class="text-6xl md:text-7xl font-bold tracking-tight mb-6">Sachin Dohdiya</h1>
-    <p class="text-2xl text-white/80 max-w-3xl">Building muscle, a business, and a legacy. Director at Asian Marmo, founder of FabricSG. Based out of Kishangarh and Jaipur, Rajasthan.</p>
-    <div class="flex flex-wrap gap-3 mt-8">
-      <a href="#work" class="px-4 py-2 rounded-md bg-accent-500 text-white text-sm font-medium hover:bg-accent-500/90">What I'm up to</a>
-      <a href="#writing" class="px-4 py-2 rounded-md border border-white/20 text-sm font-medium hover:border-accent-500">Recent writing</a>
-    </div>
+  <section id="home" class="pb-16">
+    <p class="font-mono text-sm text-white/50 mb-6">~/sachindohdiya $</p>
+    <h1 class="text-5xl md:text-6xl font-semibold tracking-tight mb-8">Sachin Dohdiya</h1>
+    <p class="text-lg text-white/80 max-w-2xl leading-relaxed">I run a marble business in Jaipur and a fabric business in Kishangarh. I also build open-source tooling for local-first AI — most of it under <a class="underline underline-offset-4 hover:text-white" href="https://github.com/sachin7x">@sachin7x</a> on GitHub.</p>
+    <p class="text-lg text-white/80 max-w-2xl leading-relaxed mt-4">Outside of work: a long-time interest in bodybuilding, and a reading habit on autonomous coding agents.</p>
   </section>
 
-  <section id="work" class="py-16 border-t border-white/5">
-    <h2 class="text-sm uppercase tracking-widest text-accent-500 mb-8">What I'm up to</h2>
-    <div class="space-y-10">
-      {roles.map(r => (
-        <div>
-          <div class="text-xs text-white/50 font-mono">{r.since}</div>
-          <div class="text-xl font-semibold mt-1">{r.role} <span class="text-white/60">· {r.org}</span></div>
-          <p class="mt-2 text-white/70">{r.note}</p>
-        </div>
-      ))}
-    </div>
-    <p class="mt-10 text-white/70 max-w-2xl">Outside of the businesses: a long-time interest in bodybuilding, an open-source hobby for local-first AI tooling, and an ongoing reading habit on autonomous coding agents.</p>
+  <section id="about" class="py-16 border-t border-white/10">
+    <h2 class="font-mono text-sm uppercase tracking-widest text-white/50 mb-6"># about</h2>
+    <p class="text-lg text-white/80 max-w-2xl leading-relaxed">Sachin Dohdiya. Based out of Kishangarh and Jaipur, Rajasthan. Director at Asian Marmo Private Limited since 2022. Built and run FabricSG, a premium fabric and textile business.</p>
   </section>
 
-  <section id="projects" class="py-16 border-t border-white/5">
-    <h2 class="text-sm uppercase tracking-widest text-accent-500 mb-8">Open source</h2>
-    <p class="text-white/70 max-w-2xl mb-6">A small selection of public repositories under my GitHub handle.</p>
-    <div class="grid md:grid-cols-2 gap-4">
-      {projects.map(p => (
-        <a href={`https://github.com/sachin7x/${p.name}`} class="block p-5 rounded-lg border border-white/10 hover:border-accent-500 transition">
-          <div class="font-mono text-accent-500">{p.name}</div>
-          <p class="mt-2 text-sm text-white/70">{p.desc}</p>
-        </a>
-      ))}
-    </div>
-    <p class="mt-6 text-sm text-white/60">More on <a class="text-accent-500 hover:underline" href="https://github.com/sachin7x?tab=repositories">github.com/sachin7x</a>.</p>
-  </section>
-
-  <section id="writing" class="py-16 border-t border-white/5">
-    <h2 class="text-sm uppercase tracking-widest text-accent-500 mb-8">Recent writing</h2>
-    <ul class="space-y-4">
-      {posts.map(p => (
+  <section id="opensource" class="py-16 border-t border-white/10">
+    <h2 class="font-mono text-sm uppercase tracking-widest text-white/50 mb-6"># open source</h2>
+    <ul class="space-y-5">
+      {repos.map(r => (
         <li>
-          <a href={`/blog/${p.slug}/`} class="group block">
-            <div class="text-lg group-hover:text-accent-500">{p.title}</div>
-            <div class="text-xs text-white/50 font-mono">{p.date}</div>
+          <a href={`https://github.com/sachin7x/${r.name}`} class="block group">
+            <div class="font-mono text-base group-hover:underline underline-offset-4">{r.name}</div>
+            <p class="mt-1 text-sm text-white/60 max-w-2xl">{r.desc}</p>
           </a>
         </li>
       ))}
     </ul>
-    <p class="mt-6"><a href="/blog/" class="text-accent-500 hover:underline">All posts →</a></p>
+    <p class="mt-8 text-sm text-white/50">More on <a class="underline underline-offset-4 hover:text-white" href="https://github.com/sachin7x?tab=repositories">github.com/sachin7x</a>.</p>
   </section>
 
-  <section id="contact" class="py-16 border-t border-white/5">
-    <h2 class="text-sm uppercase tracking-widest text-accent-500 mb-8">Find me</h2>
-    <div class="flex flex-wrap gap-5 text-sm">
-      <a class="hover:text-accent-500" href="https://github.com/sachin7x">GitHub</a>
-      <a class="hover:text-accent-500" href="https://www.instagram.com/sachindohdiya/">Instagram</a>
-      <a class="hover:text-accent-500" href="https://www.facebook.com/fabricsg/">FabricSG on Facebook</a>
-    </div>
-    <p class="mt-6 text-white/50 text-sm">For business enquiries, reach out via the channels above.</p>
+  <section id="experience" class="py-16 border-t border-white/10">
+    <h2 class="font-mono text-sm uppercase tracking-widest text-white/50 mb-6"># experience</h2>
+    <ul class="space-y-10">
+      {experience.map(e => (
+        <li>
+          <div class="font-mono text-xs text-white/40">{e.range}</div>
+          <div class="text-lg mt-1">{e.role} <span class="text-white/50">— {e.org}</span></div>
+          <p class="mt-1 text-sm text-white/60">{e.detail}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="writing" class="py-16 border-t border-white/10">
+    <h2 class="font-mono text-sm uppercase tracking-widest text-white/50 mb-6"># writing</h2>
+    <ul class="space-y-5">
+      {posts.map(p => (
+        <li>
+          <a href={`/blog/${p.slug}/`} class="block group">
+            <div class="group-hover:underline underline-offset-4">{p.title}</div>
+            <div class="font-mono text-xs text-white/40 mt-1">{p.date}</div>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-8 text-sm text-white/50"><a class="underline underline-offset-4 hover:text-white" href="/blog/">All posts →</a></p>
+  </section>
+
+  <section id="contact" class="py-16 border-t border-white/10">
+    <h2 class="font-mono text-sm uppercase tracking-widest text-white/50 mb-6"># contact</h2>
+    <ul class="space-y-3 text-base">
+      <li><span class="font-mono text-white/40 mr-3">github</span><a class="underline underline-offset-4 hover:text-white" href="https://github.com/sachin7x">github.com/sachin7x</a></li>
+      <li><span class="font-mono text-white/40 mr-3">instagram</span><a class="underline underline-offset-4 hover:text-white" href="https://www.instagram.com/sachindohdiya/">instagram.com/sachindohdiya</a></li>
+      <li><span class="font-mono text-white/40 mr-3">facebook</span><a class="underline underline-offset-4 hover:text-white" href="https://www.facebook.com/fabricsg/">facebook.com/fabricsg</a></li>
+    </ul>
+    <p class="mt-8 text-sm text-white/50">For business enquiries, reach out via any of the channels above.</p>
   </section>
 </Base>
