@@ -761,7 +761,7 @@ display: flex; gap: 0.75rem; justify-content: center;
 margin: 1.25rem 0 0.75rem; flex-wrap: wrap;
 }
 .subscribe-form input[type="email"] {
-font-family: 'Inter', sans-serif; font-size: 0.9375rem;
+font-family: 'Inter', sans-serif; font-size: 0.9375rem; line-height: normal;
 padding: 0.625rem 1rem; border: 1px solid var(--gray-300);
 border-radius: 0.375rem; width: min(280px, 100%);
 background: var(--white); color: var(--black);
@@ -770,7 +770,7 @@ background: var(--white); color: var(--black);
 outline: none; border-color: var(--black);
 }
 .subscribe-form button {
-font-family: 'Inter', sans-serif; font-size: 0.9375rem; font-weight: 600;
+font-family: 'Inter', sans-serif; font-size: 0.9375rem; font-weight: 600; line-height: normal;
 background: var(--black); color: var(--white); border: none;
 border-radius: 0.375rem; padding: 0.625rem 1.25rem; cursor: pointer;
 transition: opacity 0.3s ease;
