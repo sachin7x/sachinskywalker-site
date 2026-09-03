@@ -28,6 +28,31 @@ const links = [
   <link rel="canonical" href={Astro.url} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="alternate" type="application/rss+xml" title="Sachin Dohdiya" href="/rss.xml" />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://sachinskywalker-site.vercel.app/#sachin",
+    "name": "Sachin Dohdiya",
+    "url": "https://sachinskywalker-site.vercel.app",
+    "jobTitle": "Director, Asian Marmo Private Limited",
+    "description": "Director at Asian Marmo Private Limited. Founder of FabricSG. Builder based in Kishangarh and Jaipur, Rajasthan. Mr. Rajasthan 2019. Open-sources local-first AI tooling under @sachin7x.",
+    "worksFor": { "@type": "Organization", "name": "Asian Marmo Private Limited" },
+    "knowsAbout": [
+      "Marble Industry", "Textile Business", "Local-first AI",
+      "Claude Code", "Autonomous Coding Agents", "Bodybuilding"
+    ],
+    "sameAs": [
+      "https://github.com/sachin7x",
+      "https://www.instagram.com/sachindohdiya/",
+      "https://www.facebook.com/fabricsg/"
+    ]
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "dateModified": new Date().toISOString().slice(0, 10),
+    "mainEntity": { "@id": "https://sachinskywalker-site.vercel.app/#sachin" }
+  })} />
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
