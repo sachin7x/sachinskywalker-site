@@ -1,5 +1,5 @@
 ---
-const { title = 'Sachin SkyWalker', description = 'I build agentic systems. Right now that is local-first AI tooling: a self-hosted Claude Code proxy, autonomous coding agents, and the LSP wiring that makes them fast.', image = '/og-image.svg' } = Astro.props;
+const { title = 'Sachin Dohdiya', description = 'Director at Asian Marmo, founder of FabricSG. Building muscle, a business, and a legacy. Based out of Kishangarh and Jaipur, Rajasthan.', image = '/og-image.svg' } = Astro.props;
 const { pathname } = Astro.url;
 const isActive = (href) => href === '/' ? pathname === '/' : pathname.startsWith(href);
 ---
@@ -10,29 +10,27 @@ const isActive = (href) => href === '/' ? pathname === '/' : pathname.startsWith
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta name="author" content="Sachin SkyWalker" />
+  <meta name="author" content="Sachin Dohdiya" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Sachin SkyWalker" />
+  <meta property="og:site_name" content="Sachin Dohdiya" />
   <meta property="og:url" content={Astro.url} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={new URL(image, Astro.url)} />
+  <meta property="og:image" content={new URL(image, Astro.url) } />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href={Astro.url} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="alternate" type="application/rss+xml" title="Sachin SkyWalker" href="/rss.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Sachin Dohdiya" href="/rss.xml" />
 </head>
 <body class="min-h-screen">
   <header class="sticky top-0 z-50 backdrop-blur bg-ink-900/80 border-b border-white/5">
     <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center gap-6 text-sm">
-      <a href="/" class="font-semibold tracking-tight">Sachin SkyWalker</a>
+      <a href="/" class="font-semibold tracking-tight">Sachin Dohdiya</a>
       <div class="ml-auto flex items-center gap-5">
-        <a href="/#about" class={isActive('/#about') ? 'text-accent-500' : 'hover:text-accent-500'}>About</a>
-        <a href="/#opensource" class={isActive('/#opensource') ? 'text-accent-500' : 'hover:text-accent-500'}>Open Source</a>
-        <a href="/#experience" class={isActive('/#experience') ? 'text-accent-500' : 'hover:text-accent-500'}>Experience</a>
+        <a href="/#work" class={isActive('/#work') ? 'text-accent-500' : 'hover:text-accent-500'}>What I'm up to</a>
+        <a href="/#projects" class={isActive('/#projects') ? 'text-accent-500' : 'hover:text-accent-500'}>Open source</a>
         <a href="/blog/" class={isActive('/blog') ? 'text-accent-500' : 'hover:text-accent-500'}>Writing</a>
-        <a href="/talks/" class={isActive('/talks') ? 'text-accent-500' : 'hover:text-accent-500'}>Talks</a>
-        <a href="/#contact" class={isActive('/#contact') ? 'text-accent-500' : 'hover:text-accent-500'}>Contact</a>
+        <a href="/#contact" class={isActive('/#contact') ? 'text-accent-500' : 'hover:text-accent-500'}>Find me</a>
       </div>
     </nav>
   </header>
@@ -41,7 +39,7 @@ const isActive = (href) => href === '/' ? pathname === '/' : pathname.startsWith
   </main>
   <footer class="border-t border-white/5 mt-24 py-10 text-sm text-white/60">
     <div class="max-w-5xl mx-auto px-6 flex flex-wrap gap-6 items-center justify-between">
-      <div>© {new Date().getFullYear()} Sachin SkyWalker · <a class="hover:text-accent-500" href="https://github.com/sachin7x">GitHub</a> · <a class="hover:text-accent-500" href="/rss.xml">RSS</a></div>
+      <div>© {new Date().getFullYear()} Sachin Dohdiya · <a class="hover:text-accent-500" href="https://github.com/sachin7x">GitHub</a> · <a class="hover:text-accent-500" href="/rss.xml">RSS</a></div>
       <div class="opacity-60">Built with Astro · Deployed on Vercel</div>
     </div>
   </footer>

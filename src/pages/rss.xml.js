@@ -4,8 +4,8 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
   const posts = await getCollection('blog');
   return rss({
-    title: 'Sachin SkyWalker',
-    description: 'Notes on agentic systems, local-first AI, and the engineering behind open-source agent tooling.',
+    title: 'Sachin Dohdiya',
+    description: 'Notes on local-first AI tooling, autonomous coding agents, and the engineering behind open-source agent projects.',
     site: context.site,
     items: posts.map(p => ({
       title: p.data.title,
