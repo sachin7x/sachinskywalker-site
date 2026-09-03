@@ -11,10 +11,10 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 <Base title={`${post.data.title} — Sachin Dohdiya`} description={post.data.description}>
-  <article class="prose prose-invert max-w-3xl">
-    <a href="/blog/" class="text-sm text-accent-500 no-underline">← All posts</a>
-    <h1 class="mt-6">{post.data.title}</h1>
-    <div class="text-sm text-white/50 font-mono">{post.data.date} · {post.data.tags.join(' · ')}</div>
-    <div class="mt-8"><Content /></div>
+  <article class="max-w-3xl">
+    <a href="/blog/" class="text-sm text-white/50 no-underline hover:text-white">← All posts</a>
+    <h1 class="mt-6 text-4xl font-semibold tracking-tight">{post.data.title}</h1>
+    <div class="text-sm text-white/40 font-mono mt-2">{post.data.date} · {post.data.tags.join(' · ')}</div>
+    <div class="mt-10 prose-post"><Content /></div>
   </article>
 </Base>

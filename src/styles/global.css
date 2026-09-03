@@ -7,6 +7,28 @@ html, body { background-color: #000; color: #fff; }
 body { @apply antialiased; }
 ::selection { @apply bg-white/20 text-white; }
 a { text-decoration: none; }
-.prose pre { @apply rounded-none p-4 overflow-x-auto text-sm bg-ink-900 border border-ink-800; }
-.prose code { @apply font-mono; }
-.prose a { @apply underline underline-offset-4; }
+
+/* Hand-rolled prose styles for blog post body — kept light since
+   @tailwindcss/typography is not installed. */
+.prose-post { color: #e5e5e5; line-height: 1.75; font-size: 1.0625rem; }
+.prose-post > * + * { margin-top: 1.25rem; }
+.prose-post h2 { color: #fff; font-size: 1.5rem; font-weight: 600; margin-top: 2.5rem; }
+.prose-post h3 { color: #fff; font-size: 1.25rem; font-weight: 600; margin-top: 2rem; }
+.prose-post p { color: #e5e5e5; }
+.prose-post a { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+.prose-post a:hover { color: #fff; }
+.prose-post ul, .prose-post ol { padding-left: 1.5rem; }
+.prose-post ul { list-style: disc; }
+.prose-post ol { list-style: decimal; }
+.prose-post li { margin-top: 0.4rem; }
+.prose-post li::marker { color: #737373; }
+.prose-post strong { color: #fff; font-weight: 600; }
+.prose-post em { color: #fff; font-style: italic; }
+.prose-post code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #fff; background: #171717; padding: 0.125rem 0.375rem; font-size: 0.9em; }
+.prose-post pre { background: #0a0a0a; border: 1px solid #262626; padding: 1rem; overflow-x: auto; font-size: 0.875rem; }
+.prose-post pre code { background: transparent; padding: 0; }
+.prose-post blockquote { border-left: 2px solid #525252; padding-left: 1rem; color: #a3a3a3; }
+.prose-post hr { border-color: #262626; }
+.prose-post table { border-collapse: collapse; }
+.prose-post th, .prose-post td { border: 1px solid #262626; padding: 0.5rem 0.75rem; }
+.prose-post th { color: #fff; }
