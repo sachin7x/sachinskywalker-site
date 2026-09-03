@@ -4,9 +4,9 @@ import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
 ---
-<Base title="Writing — Sachin SkyWalker" description="Notes on agentic systems, local-first AI, and the engineering behind open-source agent tooling.">
+<Base title="Writing — Sachin Dohdiya" description="Notes on local-first AI tooling, autonomous coding agents, and the engineering behind open-source agent projects.">
   <h1 class="text-4xl font-bold tracking-tight mb-2">Writing</h1>
-  <p class="text-white/60 mb-12">Notes on agentic systems, local-first AI, and the engineering behind open-source agent tooling.</p>
+  <p class="text-white/60 mb-12">Notes on local-first AI tooling, autonomous coding agents, and the engineering behind open-source agent projects.</p>
   <ul class="space-y-8">
     {posts.map(p => (
       <li>

@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await post.render();
 ---
-<Base title={`${post.data.title} — Sachin SkyWalker`} description={post.data.description}>
+<Base title={`${post.data.title} — Sachin Dohdiya`} description={post.data.description}>
   <article class="prose prose-invert max-w-3xl">
     <a href="/blog/" class="text-sm text-accent-500 no-underline">← All posts</a>
     <h1 class="mt-6">{post.data.title}</h1>
