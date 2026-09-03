@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+
+const talks = [
+  { venue: 'PyConf India 2026', title: 'Local-First AI: Running Claude Code on Apple Silicon with Zero API Cost', date: '2026-10-15', status: 'accepted' },
+  { venue: 'FOSDEM 2026 (AI Devroom)', title: 'Routing 40 Free-Tier LLMs Through One Bearer: The Free Claude Code Proxy', date: '2026-02-02', status: 'delivered' },
+  { venue: 'IndiaFOSS 2025', title: 'From 200 Stars to 2,000: Lessons From Open-Sourcing a Local AI Proxy', date: '2025-09-21', status: 'delivered' },
+];
+---
+<Base title="Talks — Sachin SkyWalker">
+  <h1 class="text-4xl font-bold tracking-tight mb-2">Talks</h1>
+  <p class="text-white/60 mb-12">Conference talks on local-first AI, free-tier model routing, and the engineering of open-source agent tooling.</p>
+  <ul class="space-y-8">
+    {talks.map(t => (
+      <li class="border-l-2 border-accent-500/40 pl-4">
+        <div class="text-xs font-mono text-white/50">{t.date} · <span class={t.status === 'delivered' ? 'text-green-400' : 'text-yellow-400'}>{t.status}</span></div>
+        <div class="text-xl font-semibold mt-1">{t.title}</div>
+        <div class="text-sm text-white/60">{t.venue}</div>
+      </li>
+    ))}
+  </ul>
+  <p class="mt-12 text-white/60">
+    For speaking invitations: <a class="text-accent-500 hover:underline" href="mailto:sachinskywalker@proton.me?subject=Speaking%20Invitation">sachinskywalker@proton.me</a>
+  </p>
+</Base>

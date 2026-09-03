@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+---
+<Base title="Writing — Sachin SkyWalker" description="Notes on agentic systems, local-first AI, and the engineering behind open-source agent tooling.">
+  <h1 class="text-4xl font-bold tracking-tight mb-2">Writing</h1>
+  <p class="text-white/60 mb-12">Notes on agentic systems, local-first AI, and the engineering behind open-source agent tooling.</p>
+  <ul class="space-y-8">
+    {posts.map(p => (
+      <li>
+        <a href={`/blog/${p.slug}/`} class="block group">
+          <div class="text-xs font-mono text-white/50">{p.data.date}</div>
+          <div class="text-2xl font-semibold mt-1 group-hover:text-accent-500">{p.data.title}</div>
+          <p class="mt-2 text-white/70 max-w-3xl">{p.data.description}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>

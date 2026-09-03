@@ -1,0 +1,124 @@
+---
+import Base from '../layouts/Base.astro';
+
+const repos = [
+  { name: 'free-claude-code-proxy',   stars: '600+',  desc: 'Self-hosted proxy that gives Claude Code 40+ free upstreams through one bearer key.' },
+  { name: 'free-claude-code',         stars: '500+',  desc: 'Run Claude Code, Codex, and Pi for free from your terminal. One install, zero API keys.' },
+  { name: 'claude-code-local',        stars: '400+',  desc: 'Run Claude Code 100% on-device with local AI on Apple Silicon. No data leaves the box.' },
+  { name: 'local-devin',              stars: '300+',  desc: 'An open-source, local alternative to Devin AI. Powered by local Ollama models and Claude Code.' },
+  { name: 'awesome-claude-skills',    stars: '480+',  desc: 'Curated collection of 50+ verified skills for Claude Code, Claude.ai, and the API.' },
+  { name: 'claude-code-hooks',        stars: '460+',  desc: 'A growing collection of useful Claude Code hooks. Copy, paste, customize.' },
+  { name: 'neuroarxiv',               stars: '120+',  desc: 'A skill that kills from-scratch coding — Claude checks real arXiv before writing a line.' },
+  { name: 'fluidvoice',               stars: '200+',  desc: 'Fastest macOS dictation with on-device STT and local LLM rewrite. No cloud, no latency.' },
+  { name: 'wisprflow-sdk',            stars: '90+',   desc: 'Reverse-engineered Wispr Flow audio API. Use it in your own apps.' },
+  { name: 'clotilde',                 stars: '60+',   desc: 'A power-user companion for Claude Code. Compaction control, branch viz, cost ledger.' },
+  { name: 'Yap',                      stars: '180+',  desc: 'Free, offline voice dictation for macOS, Windows, and Linux. Hotkey-driven, no telemetry.' },
+  { name: 'itr-wala',                 stars: '460+',  desc: 'File Indian income-tax returns from the terminal. The model reads documents, tested Python computes every rupee.' },
+];
+
+const experience = [
+  { years: '2024 — Now', role: 'AI Tooling Architect', company: 'Independent',     bullets: ['Shipped the free-claude-code proxy (600+ ★) — 40+ upstreams behind one bearer.', 'Built clotilde, the Claude Code companion for cost/compaction control.', 'Open-sourced neuroarxiv, the arXiv-grounded coding skill.'] },
+  { years: '2022 — 2024', role: 'Senior AI Engineer',  company: 'Series-B Startup', bullets: ['Took an LLM feature from prototype to production serving 200K MAU.', 'Cut inference cost 73% by routing to a free-tier mix under 50ms p95.', "Wrote the team's evaluation harness and shipped it as Awesome Claude Skills."] },
+  { years: '2020 — 2022', role: 'ML Platform Engineer',company: 'Mid-stage SaaS',    bullets: ['Owned the model-serving stack on Kubernetes. 6 models, 4 regions, zero downtime.', 'Built the eval pipeline that gates every PR on a regression suite of 12K prompts.'] },
+  { years: '2017 — 2020', role: 'Software Engineer',   company: 'Enterprise',        bullets: ['Production services in Go and Python across 4 product lines.', 'First-call pager for 18 months straight. Survived.'] },
+];
+
+const posts = [
+  { slug: 'prime-agent-autonomous-coding', title: 'Configuring Prime Agent 0.9.1 for Long-Running Autonomous Coding', date: '2026-09-03' },
+  { slug: 'claude-code-lsp-enable',        title: 'The 2-Minute Claude Code Upgrade: Enabling the LSP Tool', date: '2026-09-03' },
+  { slug: 'local-claude-code-proxy',       title: 'Routing Claude Code Through a Local Free Model Proxy', date: '2026-09-02' },
+];
+---
+<Base>
+  <section id="home" class="py-12">
+    <p class="text-accent-500 font-mono text-sm mb-6">~/sachinskywalker</p>
+    <h1 class="text-6xl md:text-7xl font-bold tracking-tight mb-6">Sachin SkyWalker</h1>
+    <p class="text-2xl text-white/80 max-w-3xl">I build agentic systems. Right now that is local-first AI tooling: a self-hosted Claude Code proxy, autonomous coding agents, and the LSP wiring that makes them fast.</p>
+    <div class="flex flex-wrap gap-3 mt-8">
+      <a href="#opensource" class="px-4 py-2 rounded-md bg-accent-500 text-white text-sm font-medium hover:bg-accent-500/90">See the work</a>
+      <a href="#contact" class="px-4 py-2 rounded-md border border-white/20 text-sm font-medium hover:border-accent-500">Get in touch</a>
+    </div>
+  </section>
+
+  <section id="about" class="py-16 border-t border-white/5">
+    <h2 class="text-sm uppercase tracking-widest text-accent-500 mb-8">About</h2>
+    <p class="text-2xl text-white/90 max-w-3xl">Builder. 8+ years. 3 teams. 0 decks. I build things: AI systems, engineering platforms, open source tools. The pattern is always the same: real problem, small team, relentless focus.</p>
+  </section>
+
+  <section id="opensource" class="py-16 border-t border-white/5">
+    <h2 class="text-sm uppercase tracking-widest text-accent-500 mb-8">Open Source</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      {repos.map(r => (
+        <a href={`https://github.com/sachin7x/${r.name}`} class="block p-5 rounded-lg border border-white/10 hover:border-accent-500 transition">
+          <div class="flex items-baseline justify-between">
+            <span class="font-mono text-accent-500">{r.name}</span>
+            <span class="text-xs text-white/50">{r.stars} ★</span>
+          </div>
+          <p class="mt-2 text-sm text-white/70">{r.desc}</p>
+        </a>
+      ))}
+    </div>
+    <p class="mt-6 text-sm text-white/60">+ 100 more public repos · <a class="text-accent-500 hover:underline" href="https://github.com/sachin7x?tab=repositories">all of them</a></p>
+  </section>
+
+  <section id="experience" class="py-16 border-t border-white/5">
+    <h2 class="text-sm uppercase tracking-widest text-accent-500 mb-8">Experience</h2>
+    <div class="space-y-10">
+      {experience.map(e => (
+        <div>
+          <div class="text-xs text-white/50 font-mono">{e.years}</div>
+          <div class="text-xl font-semibold mt-1">{e.role} <span class="text-white/60">· {e.company}</span></div>
+          <ul class="mt-3 space-y-1 text-white/70 list-disc list-inside">
+            {e.bullets.map(b => <li>{b}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="writing" class="py-16 border-t border-white/5">
+    <h2 class="text-sm uppercase tracking-widest text-accent-500 mb-8">Writing</h2>
+    <ul class="space-y-4">
+      {posts.map(p => (
+        <li>
+          <a href={`/blog/${p.slug}/`} class="group block">
+            <div class="text-lg group-hover:text-accent-500">{p.title}</div>
+            <div class="text-xs text-white/50 font-mono">{p.date}</div>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-6"><a href="/blog/" class="text-accent-500 hover:underline">All posts →</a></p>
+  </section>
+
+  <section id="contact" class="py-16 border-t border-white/5">
+    <h2 class="text-sm uppercase tracking-widest text-accent-500 mb-8">Let's Build</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Engineers</h3>
+        <p class="text-white/70">I build teams that ship. Open to coffee chats and pair-debugging sessions on agentic infra.</p>
+        <a href="mailto:sachinskywalker@proton.me?subject=Coffee%20Chat" class="mt-3 inline-block text-accent-500 hover:underline">Coffee chats →</a>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Founders</h3>
+        <p class="text-white/70">Need an architect who has shipped production agentic systems? Technical advisory engagements open.</p>
+        <a href="mailto:sachinskywalker@proton.me?subject=Technical%20Advisory" class="mt-3 inline-block text-accent-500 hover:underline">Technical advisory →</a>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Conference organizers</h3>
+        <p class="text-white/70">I speak on local-first AI, the economics of free-tier model routing, and LSP-for-agents.</p>
+        <a href="mailto:sachinskywalker@proton.me?subject=Speaking%20Invitation" class="mt-3 inline-block text-accent-500 hover:underline">Invite to speak →</a>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Direct</h3>
+        <p class="text-white/70">For everything else, write directly.</p>
+        <a href="mailto:sachinskywalker@proton.me" class="mt-3 inline-block text-accent-500 hover:underline">sachinskywalker@proton.me</a>
+      </div>
+    </div>
+    <div class="mt-10 flex gap-5 text-sm">
+      <a class="hover:text-accent-500" href="https://github.com/sachin7x">GitHub</a>
+      <a class="hover:text-accent-500" href="https://x.com/sachin7x">X</a>
+      <a class="hover:text-accent-500" href="https://www.linkedin.com/in/sachin7x">LinkedIn</a>
+    </div>
+  </section>
+</Base>
